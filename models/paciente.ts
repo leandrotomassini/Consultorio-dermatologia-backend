@@ -38,4 +38,4 @@ const PacienteSchema = new Schema<IPaciente>({
     },
 });
 
-export const Compra = model<IPaciente>('Paciente', PacienteSchema);
+export const Paciente = model<IPaciente>('Paciente', PacienteSchema);

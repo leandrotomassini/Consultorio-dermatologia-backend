@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { listarUsuarios, crearUsuario, actualizarUsuario, verUsuario } from '../controller/usuario';
-
 
 import { emailExiste, esRoleValido } from '../helpers/db-validators';
 import { validarCampos } from '../middlewares/validar-campos';
