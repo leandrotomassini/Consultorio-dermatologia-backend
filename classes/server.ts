@@ -6,7 +6,6 @@ import * as socket from '../sockets/sockets';
 
 import { SERVER_PORT } from '../global/enviroment';
 
-import rolesRoutes from '../routes/rol';
 import { dbConnection } from '../database/config';
 
 export default class Server {

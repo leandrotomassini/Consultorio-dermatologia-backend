@@ -62,9 +62,9 @@ export const actualizarPaciente = async (req: Request, res: Response) => {
 
 export const verPaciente = async (req: Request, res: Response) => {
     try {
-        const uid = req.params.uid;
+        const id = req.params.id;
 
-        const paciente = await Paciente.findById(uid);
+        const paciente = await Paciente.findById(id);
 
         res.status(200).json({
             ok: true,

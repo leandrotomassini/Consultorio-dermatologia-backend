@@ -7,6 +7,7 @@ import roles from './routes/rol';
 import usuarios from './routes/usuario';
 import auth from './routes/auth';
 import paciente from './routes/paciente';
+import historias from './routes/historia';
 
 
 const server = Server.instance;
@@ -22,6 +23,7 @@ server.app.use('/api/roles', roles);
 server.app.use('/api/usuarios', usuarios);
 server.app.use('/api/auth', auth);
 server.app.use('/api/pacientes', paciente);
+server.app.use('/api/historias', historias);
 
 
 server.start(() => {
