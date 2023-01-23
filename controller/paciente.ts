@@ -1,17 +1,16 @@
 import { Request, Response } from 'express';
-import * as bcrypt from 'bcryptjs'; 
 
 import { Paciente } from '../models/paciente';
 
-export const listarUsuarios = async (req: Request, res: Response) => {
+
+
+export const listarPacientes = async (req: Request, res: Response) => {
     try {
-        // const query = { estado: true };
-        // const usuarios = await Usuario.find(query);
-        const usuarios = await Usuario.find();
+        const pacientes = await Paciente.find();
 
         res.status(200).json({
             ok: true,
-            usuarios
+            pacientes
         });
     } catch (error) {
         console.log(error);
@@ -22,34 +21,35 @@ export const listarUsuarios = async (req: Request, res: Response) => {
     }
 }
 
-export const crearUsuario = async(req: Request, res: Response) => {
+export const crearPaciente = async (req: Request, res: Response) => {
+
+    const { usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado } = req.body;
     
-    const { nombre, correo, password, rol } = req.body;
-    const usuario = new Usuario({ nombre, correo, password, rol });
+    const paciente = new Paciente({ usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado });
 
-    // Encriptar la contraseña
-    const salt = bcrypt.genSaltSync();
-    usuario.password = bcrypt.hashSync( password, salt );
 
-    // Guardar en BD
-    await usuario.save();
+    await paciente.save();
 
     res.json({
-        usuario
+        paciente
     });
 }
 
-export const actualizarUsuario = async (req: Request, res: Response) => {
+export const actualizarPaciente = async (req: Request, res: Response) => {
 
     try {
 
         const id = req.params.id;
+        const { usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado } = req.body;
 
-        const usuario = await Usuario.findByIdAndUpdate(id, req.body, { new: true });
+        const paciente = await Paciente.findByIdAndUpdate(
+            id,
+            { usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado },
+            { new: true });
 
         res.status(200).json({
             ok: true,
-            usuario
+            paciente
         });
     } catch (error) {
         console.log(error);
@@ -60,15 +60,15 @@ export const actualizarUsuario = async (req: Request, res: Response) => {
     }
 }
 
-export const verUsuario = async (req: Request, res: Response) => {
+export const verPaciente = async (req: Request, res: Response) => {
     try {
         const uid = req.params.uid;
 
-        const usuario = await Usuario.findById(uid);
+        const paciente = await Paciente.findById(uid);
 
         res.status(200).json({
             ok: true,
-            usuario
+            paciente
         });
     } catch (error) {
         console.log(error);

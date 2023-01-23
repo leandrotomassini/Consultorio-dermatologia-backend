@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { getRoles, postRol, putRol, getRol } from '../controller/rol';
+import { actualizarPaciente, crearPaciente, listarPacientes, verPaciente } from '../controller/paciente';
+
 import { validarCampos } from '../middlewares/validar-campos';
 import { validarJWT } from '../middlewares/validar-jwt';
 import { esAdminRole } from '../middlewares/validar-roles';
@@ -12,25 +13,24 @@ router.get('/', [
     validarJWT,
     esAdminRole,
     validarCampos
-], getRoles);
+], listarPacientes);
 
 router.post('/', [
     validarJWT,
     esAdminRole,
-    check('rol', 'El rol es obligatorio').not().isEmpty(),
     validarCampos
-], postRol);
+], crearPaciente);
 
 router.put('/:id', [
     validarJWT,
     esAdminRole,
     validarCampos
-], putRol);
+], actualizarPaciente);
 
 router.get('/:id', [
     validarJWT,
     esAdminRole,
     validarCampos
-], getRol);
+], verPaciente);
 
 export default router;
