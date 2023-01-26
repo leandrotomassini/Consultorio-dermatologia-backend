@@ -23,16 +23,24 @@ export const listarPacientes = async (req: Request, res: Response) => {
 
 export const crearPaciente = async (req: Request, res: Response) => {
 
-    const { usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado } = req.body;
-    
-    const paciente = new Paciente({ usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado });
+    try {
+        const { usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado } = req.body;
+
+        const paciente = new Paciente({ usuario, nombre, sexo, dni, fechaNacimiento, direccion, obraSocial, estado });
 
 
-    await paciente.save();
+        await paciente.save();
 
-    res.json({
-        paciente
-    });
+        res.json({
+            paciente
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: false,
+            msg: 'Error al guardar el nuevo paciente.'
+        })
+    }
 }
 
 export const actualizarPaciente = async (req: Request, res: Response) => {

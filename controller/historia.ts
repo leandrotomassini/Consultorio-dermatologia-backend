@@ -23,15 +23,23 @@ export const listarHistoria = async (req: Request, res: Response) => {
 
 export const nuevaHistoria = async (req: Request, res: Response) => {
 
-    const { usuario, paciente, historia, fecha, estado } = req.body;
+    try {
+        const { usuario, paciente, historia, fecha, estado } = req.body;
 
-    const nuevaHistoria = new Historia({ usuario, paciente, historia, fecha, estado });
+        const nuevaHistoria = new Historia({ usuario, paciente, historia, fecha, estado });
 
-    await nuevaHistoria.save();
+        await nuevaHistoria.save();
 
-    res.json({
-        nuevaHistoria
-    });
+        res.json({
+            nuevaHistoria
+        });
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: 'Error al guardar la nueva historia.',
+            error
+        })
+    }
 }
 
 export const actualizarHistoria = async (req: Request, res: Response) => {
