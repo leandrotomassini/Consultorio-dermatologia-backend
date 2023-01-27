@@ -7,6 +7,8 @@ export const dbConnection = async () => {
 
     try {
 
+        mongoose.set("strictQuery", false);
+
         await mongoose.connect(MONGODB_CNN);
 
         console.log('Base de datos online');
